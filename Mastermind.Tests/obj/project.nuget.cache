@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "U12aXbwH3WYFaDWJC+j3VkPl3zQSgvz26IEPke+cxAhtNdY6S199UF5xUgRV7ZOBZ05oHssO2NhydB7Oh6HCVA==",
+  "dgSpecHash": "Jy/5/GNjaDp/jyE8kUGV691AK8eqNoJTyye7d6c5j1FXyDflwUN8nySaiVhnlDfgG3bkGzGsEWJQQnlZqP+fUA==",
   "success": true,
   "projectFilePath": "/Users/Michael.Wang/Desktop/MYOB/MYOB Katas/Language Design/MastermindKata/Mastermind.Tests/Mastermind.Tests.csproj",
   "expectedPackageFiles": [
