@@ -3,7 +3,7 @@ using Xunit;
 
 namespace Mastermind.Tests
 {
-    public class CollectionSizeCheckerTests
+    public class CollectionSizeValidatorTests
     {
         [Fact]
         public void IsCollectionSizeValid_ShouldReturnTrue_GivenCorrectCollectionSize()
@@ -15,7 +15,7 @@ namespace Mastermind.Tests
                 "3",
                 "4"
             };
-            var collectionSizeChecker = new CollectionSizeChecker();
+            var collectionSizeChecker = new CollectionSizeValidator();
 
             var actual = collectionSizeChecker.IsCollectionSizeValid(collection);
 
@@ -30,7 +30,7 @@ namespace Mastermind.Tests
                 "1",
                 "2",
             };
-            var collectionSizeChecker = new CollectionSizeChecker();
+            var collectionSizeChecker = new CollectionSizeValidator();
 
             var actual = collectionSizeChecker.IsCollectionSizeValid(collection);
 
