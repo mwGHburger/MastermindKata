@@ -19,5 +19,17 @@ namespace Mastermind.Tests
                 "Red", "Blue", "Green", "Yellow"
             };
         }
+
+        public static List<IErrorValidator> SetupValidators(IErrorValidator validator1, IErrorValidator validator2, IErrorValidator validator3)
+        {
+            return new List<IErrorValidator>()
+            {
+                validator1,
+                validator2,
+                validator3
+            };
+        }
+        
     }
+    
 }

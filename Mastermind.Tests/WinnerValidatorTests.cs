@@ -13,9 +13,9 @@ namespace Mastermind.Tests
             {
                 "Red", "Blue", "Green", "Yellow"
             };
-            var winnerValidator = new WinnerValidator(correctColours);
+            var winnerValidator = new WinnerValidator();
 
-            var actual = winnerValidator.Validate(input);
+            var actual = winnerValidator.isWinner(input, correctColours);
 
             Assert.True(actual);
         }
@@ -30,9 +30,9 @@ namespace Mastermind.Tests
             {
                 colour1, colour2, colour3, colour4
             };
-            var winnerValidator = new WinnerValidator(correctColours);
+            var winnerValidator = new WinnerValidator();
 
-            var actual = winnerValidator.Validate(input);
+            var actual = winnerValidator.isWinner(input, correctColours);
 
             Assert.False(actual);
         }

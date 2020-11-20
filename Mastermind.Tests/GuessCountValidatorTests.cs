@@ -9,11 +9,12 @@ namespace Mastermind.Tests
         public void Validate_ShouldReturnTrue_IfCurrentCountIsLessThanMaxCount()
         {
             var mockGuessCounter = new Mock<ICounter>();
-            var guessCountValidator = new GuessCountValidator(mockGuessCounter.Object, 60);
+            var mockApplicationStopper = new Mock<IApplicationStopper>();
+            var guessCountValidator = new GuessCountValidator(mockGuessCounter.Object,mockApplicationStopper.Object , 60);
 
             mockGuessCounter.Setup(x => x.CurrentCount).Returns(50);
 
-            var actual = guessCountValidator.Validate();
+            var actual = guessCountValidator.isValid();
 
             Assert.True(actual);
         }
@@ -22,13 +23,15 @@ namespace Mastermind.Tests
         public void Validate_ShouldReturnFalse_IfCurrentCountIsLessThanMaxCount()
         {
             var mockGuessCounter = new Mock<ICounter>();
-            var guessCountValidator = new GuessCountValidator(mockGuessCounter.Object, 60);
+            var mockApplicationStopper = new Mock<IApplicationStopper>();
+            var guessCountValidator = new GuessCountValidator(mockGuessCounter.Object, mockApplicationStopper.Object, 60);
 
             mockGuessCounter.Setup(x => x.CurrentCount).Returns(61);
 
-            var actual = guessCountValidator.Validate();
+            var actual = guessCountValidator.isValid();
 
             Assert.False(actual);
+            mockApplicationStopper.VerifySet(x => x.StopApplication = true);
         }
     }
 }

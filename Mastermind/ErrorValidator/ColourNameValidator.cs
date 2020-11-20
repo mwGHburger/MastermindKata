@@ -2,17 +2,17 @@ using System.Collections.Generic;
 
 namespace Mastermind
 {
-    public class ColourValidator
+    public class ColourNameValidator
     {
         private List<string> _colours;
 
-        public ColourValidator(List<string> colours)
+        public ColourNameValidator(List<string> colours)
         {
             _colours = colours;
         }
-        public bool AreColoursValid(List<string> collection)
+        public bool IsValid(List<string> inputColours)
         {
-            foreach(string colour in collection)
+            foreach(string colour in inputColours)
             {
                 var doesColourExist = _colours.Exists(x => x.Equals(colour));
                 if(!doesColourExist)

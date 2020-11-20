@@ -5,9 +5,9 @@ namespace Mastermind
     public class CollectionSizeValidator
     {
         private int _maxCollectionSize = 4;
-        public bool IsCollectionSizeValid(List<string> collection)
+        public bool IsValid(List<string> inputColours)
         {
-            return collection.Count.Equals(_maxCollectionSize);
+            return inputColours.Count.Equals(_maxCollectionSize);
         }
     }
 }

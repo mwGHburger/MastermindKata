@@ -17,7 +17,7 @@ namespace Mastermind.Tests
             };
             var collectionSizeChecker = new CollectionSizeValidator();
 
-            var actual = collectionSizeChecker.IsCollectionSizeValid(collection);
+            var actual = collectionSizeChecker.IsValid(collection);
 
             Assert.True(actual);
         }
@@ -32,7 +32,7 @@ namespace Mastermind.Tests
             };
             var collectionSizeChecker = new CollectionSizeValidator();
 
-            var actual = collectionSizeChecker.IsCollectionSizeValid(collection);
+            var actual = collectionSizeChecker.IsValid(collection);
 
             Assert.False(actual);
         }

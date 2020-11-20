@@ -16,9 +16,9 @@ namespace Mastermind.Tests
                 "Green",
                 "Orange"
             };
-            var colourChecker = new ColourValidator(colours);
+            var colourChecker = new ColourNameValidator(colours);
 
-            var actual = colourChecker.AreColoursValid(collection);
+            var actual = colourChecker.IsValid(collection);
 
             Assert.True(actual);
         }
@@ -34,9 +34,9 @@ namespace Mastermind.Tests
                 "Grey",
                 "Orange"
             };
-            var colourChecker = new ColourValidator(colours);
+            var colourChecker = new ColourNameValidator(colours);
 
-            var actual = colourChecker.AreColoursValid(collection);
+            var actual = colourChecker.IsValid(collection);
 
             Assert.False(actual);
         }
