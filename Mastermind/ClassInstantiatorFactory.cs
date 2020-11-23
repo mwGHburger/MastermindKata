@@ -7,6 +7,7 @@ namespace Mastermind
         private static int _maxGuesses = 60;
         private static ICounter _guessCounter = CreateGuessCounter();
         private static IApplicationStopper _applicationStopper = CreateApplicationStopper();
+        
         public static MastermindApplication CreateMastermindApplication()
         {
             return new MastermindApplication(CreateUserInterface(), CreateFormatter(), CreateErrorsValidator(), CreateWinnerValidator(), CreateWinnerColoursGenerator(), CreateEncryptedCollectionsGenerator(), _applicationStopper, _guessCounter);
