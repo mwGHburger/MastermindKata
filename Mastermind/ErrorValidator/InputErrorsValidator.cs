@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace Mastermind
 {
-    public class InputErrorsValidator
+    public class InputErrorsValidator : IErrorsValidator
     {
         private List<IErrorValidator> _errorValidators;
 

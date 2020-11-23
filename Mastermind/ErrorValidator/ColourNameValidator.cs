@@ -2,9 +2,10 @@ using System.Collections.Generic;
 
 namespace Mastermind
 {
-    public class ColourNameValidator
+    public class ColourNameValidator : IErrorValidator
     {
         private List<string> _colours;
+        public string ErrorMessage {get;} = "Wrong Colour";
 
         public ColourNameValidator(List<string> colours)
         {

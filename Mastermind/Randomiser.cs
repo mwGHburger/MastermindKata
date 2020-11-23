@@ -2,7 +2,7 @@ using System;
 
 namespace Mastermind
 {
-    public class Randomiser
+    public class Randomiser : IRandomiser
     {
         public int GenerateRandomNumber(int maxValue)
         {

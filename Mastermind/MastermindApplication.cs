@@ -20,24 +20,29 @@ namespace Mastermind
             _winningColoursGenerator = winningColoursGenerator;
             _encryptedCollectionsGenerator = encryptedCollectionsGenerator;
             _applicationStopper = applicationStopper;
-            
         }
 
         public void Run()
         {
+            _userInterface.Print(StandardMessages.Welcome());
+            _userInterface.Print(StandardMessages.GeneratingColours());
             var winningColours = _winningColoursGenerator.Generate();
-            
             do
             {
+                _userInterface.Print(StandardMessages.AskForInput());
                 var inputColours = _userInterface.GetInput();
                 var coloursList = _formatter.ConvertToList(inputColours);
                 _errorsValidator.Check(coloursList);
-                _winnerValidator.isWinner(coloursList, winningColours);
+                if(_winnerValidator.isWinner(coloursList, winningColours))
+                {
+                    _applicationStopper.StopApplication = true;
+                }
                 var encryptedClues = _encryptedCollectionsGenerator.Generate(coloursList,winningColours);
                 var encryptedCluesString = _formatter.ConvertToString(encryptedClues);
                 _userInterface.Print(encryptedCluesString);
             }
             while(!_applicationStopper.StopApplication);
+            _userInterface.Print(StandardMessages.EndOfApplication());
         }
     }
 }

@@ -6,7 +6,8 @@ namespace Mastermind
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            var application = ClassInstantiatorFactory.CreateMastermindApplication();
+            application.Run();
         }
     }
 }

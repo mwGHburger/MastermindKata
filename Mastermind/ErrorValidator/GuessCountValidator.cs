@@ -1,10 +1,13 @@
+using System.Collections.Generic;
+
 namespace Mastermind
 {
-    public class GuessCountValidator
+    public class GuessCountValidator : IErrorValidator
     {
         private ICounter _guessCounter;
         private IApplicationStopper _applicationStopper;
         private int _maxGuesses;
+        public string ErrorMessage {get;} = "Too many guesses";
 
         public GuessCountValidator(ICounter guessCounter, IApplicationStopper applicationStopper, int maxGuesses)
         {
@@ -13,7 +16,7 @@ namespace Mastermind
             _maxGuesses = maxGuesses;
         }
 
-        public bool isValid()
+        public bool IsValid(List<string> collection)
         {
             _applicationStopper.StopApplication = true;
             return _guessCounter.CurrentCount <= _maxGuesses;

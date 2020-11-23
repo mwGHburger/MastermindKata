@@ -7,7 +7,7 @@ namespace Mastermind.Tests
     public class MastermindApplicationTests
     {
         [Fact]
-        public void Run_ShouldStartTheApplication()
+        public void Run_ShouldStartTheApplication_WhenWinnerExists()
         {
             var mockUserInterface = new Mock<IUserInterface>();
             var mockFormatter = new Mock<IFormatter>();
@@ -16,13 +16,21 @@ namespace Mastermind.Tests
             var mockColoursGenerator = new Mock<IWinningColoursGenerator>();
             var mockEncryptedCollectionsGenerator = new Mock<IEncryptedCollectionsGenerator>();
             var mockApplicationStopper = new Mock<IApplicationStopper>();
-            var mastermind = new MastermindApplication(mockUserInterface.Object, mockFormatter.Object, mockErrorsValidator.Object, mockWinnerValidator.Object, mockColoursGenerator.Object, mockEncryptedCollectionsGenerator.Object, mockApplicationStopper.Object);
+            var mastermind = new MastermindApplication(
+                mockUserInterface.Object, 
+                mockFormatter.Object, 
+                mockErrorsValidator.Object, 
+                mockWinnerValidator.Object, 
+                mockColoursGenerator.Object, 
+                mockEncryptedCollectionsGenerator.Object, 
+                mockApplicationStopper.Object
+            );
 
             mockApplicationStopper.Setup(x => x.StopApplication).Returns(true);
 
             mastermind.Run();
 
-            mockUserInterface.Verify(x => x.Print(It.IsAny<string>()), Times.Exactly(1));
+            mockUserInterface.Verify(x => x.Print(It.IsAny<string>()), Times.Exactly(5));
             mockUserInterface.Verify(x => x.GetInput(), Times.Exactly(1));
             mockFormatter.Verify(x => x.ConvertToList(It.IsAny<string>()), Times.Exactly(1));
             mockFormatter.Verify(x => x.ConvertToString(It.IsAny<List<string>>()), Times.Exactly(1));
