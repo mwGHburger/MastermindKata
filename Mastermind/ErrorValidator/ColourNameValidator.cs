@@ -5,7 +5,7 @@ namespace Mastermind
     public class ColourNameValidator : IErrorValidator
     {
         private List<string> _colours;
-        public string ErrorMessage {get;} = "Wrong Colour";
+        public string ErrorMessage {get;} = StandardMessages.ColourNameError();
 
         public ColourNameValidator(List<string> colours)
         {

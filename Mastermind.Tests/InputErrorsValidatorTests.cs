@@ -23,7 +23,7 @@ namespace Mastermind.Tests
             mockGuessCounterValidator.Setup(x => x.ErrorMessage).Returns(errorMessage);
 
             
-            var exception = Assert.Throws<ArgumentException>(() => game.Check(input));
+            var exception = Assert.Throws<Exception>(() => game.Check(input));
             Assert.Equal(errorMessage, exception.Message);
 
             mockGuessCounterValidator.Verify(x => x.IsValid(input), Times.Exactly(1));
@@ -44,7 +44,7 @@ namespace Mastermind.Tests
             mockCollectionSizeValidator.Setup(x => x.IsValid(input)).Returns(false);
             mockCollectionSizeValidator.Setup(x => x.ErrorMessage).Returns(errorMessage);
 
-            var exception = Assert.Throws<ArgumentException>(() => game.Check(input));
+            var exception = Assert.Throws<Exception>(() => game.Check(input));
             Assert.Equal(errorMessage, exception.Message);
 
             mockGuessCounterValidator.Verify(x => x.IsValid(input), Times.Exactly(1));
@@ -65,36 +65,12 @@ namespace Mastermind.Tests
             mockColourNameValidator.Setup(x => x.IsValid(input)).Returns(false);
             mockColourNameValidator.Setup(x => x.ErrorMessage).Returns(errorMessage);
 
-            var exception = Assert.Throws<ArgumentException>(() => game.Check(input));
+            var exception = Assert.Throws<Exception>(() => game.Check(input));
             Assert.Equal(errorMessage, exception.Message);
 
             mockGuessCounterValidator.Verify(x => x.IsValid(input), Times.Exactly(1));
             mockCollectionSizeValidator.Verify(x => x.IsValid(input), Times.Exactly(1));
             mockColourNameValidator.Verify(x => x.IsValid(input), Times.Exactly(1));
         }
-
-        // [Fact]
-        // public void Check_ShouldReturnTrue_And_PrintToConsoleForCorrectColours()
-        // {
-        //     var errorValidators = TestHelper.SetupValidators(mockGuessCounterValidator.Object, mockCollectionSizeValidator.Object, mockColourNameValidator.Object);
-
-        //     var input = new List<string>();
-        //     var correctColours = new List<string>();
-        //     var game = new Game(mockCommandLine.Object, mockWinnerValidator.Object, errorValidators);
-        //     var winningMessage = "WON!";
-
-        //     mockGuessCounterValidator.Setup(x => x.IsValid(input)).Returns(true);
-        //     mockCollectionSizeValidator.Setup(x => x.IsValid(input)).Returns(true);
-        //     mockColourNameValidator.Setup(x => x.IsValid(input)).Returns(true);
-        //     mockWinnerValidator.Setup(x => x.isWinner(input, correctColours)).Returns(true);
-
-        //     game.Check(input, correctColours);
-
-        //     mockGuessCounterValidator.Verify(x => x.IsValid(input), Times.Exactly(1));
-        //     mockCollectionSizeValidator.Verify(x => x.IsValid(input), Times.Exactly(1));
-        //     mockColourNameValidator.Verify(x => x.IsValid(input), Times.Exactly(1));
-        //     mockCommandLine.Verify(x => x.Print(winningMessage), Times.Exactly(1));
-
-        // }
     }
 }

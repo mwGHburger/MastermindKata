@@ -7,7 +7,7 @@ namespace Mastermind
         private ICounter _guessCounter;
         private IApplicationStopper _applicationStopper;
         private int _maxGuesses;
-        public string ErrorMessage {get;} = "Too many guesses";
+        public string ErrorMessage {get;} = StandardMessages.GuessCountError();
 
         public GuessCountValidator(ICounter guessCounter, IApplicationStopper applicationStopper, int maxGuesses)
         {
@@ -18,8 +18,12 @@ namespace Mastermind
 
         public bool IsValid(List<string> collection)
         {
+            if (_guessCounter.CurrentCount < _maxGuesses)
+            {
+                return true;
+            }
             _applicationStopper.StopApplication = true;
-            return _guessCounter.CurrentCount <= _maxGuesses;
+            return false;
         }
     }
 }

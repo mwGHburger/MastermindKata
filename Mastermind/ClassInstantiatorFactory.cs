@@ -5,37 +5,39 @@ namespace Mastermind
     public static class ClassInstantiatorFactory
     {
         private static int _maxGuesses = 60;
+        private static ICounter _guessCounter = CreateGuessCounter();
+        private static IApplicationStopper _applicationStopper = CreateApplicationStopper();
         public static MastermindApplication CreateMastermindApplication()
         {
-            return new MastermindApplication(CreateUserInterface(), CreateFormatter(), CreateErrorsValidator(), CreateWinnerValidator(), CreateWinnerColoursGenerator(), CreateEncryptedCollectionsGenerator(), CreateApplicationStopper());
+            return new MastermindApplication(CreateUserInterface(), CreateFormatter(), CreateErrorsValidator(), CreateWinnerValidator(), CreateWinnerColoursGenerator(), CreateEncryptedCollectionsGenerator(), _applicationStopper, _guessCounter);
         }
 
-        public static IUserInterface CreateUserInterface()
+        private static IUserInterface CreateUserInterface()
         {
             return new CommandLine();
         }
 
-        public static IFormatter CreateFormatter()
+        private static IFormatter CreateFormatter()
         {
             return new Formatter();
         }
 
-        public static IErrorsValidator CreateErrorsValidator()
+        private static IErrorsValidator CreateErrorsValidator()
         {
             return new InputErrorsValidator(CreateErrorValidators());
         }
 
-        public static List<IErrorValidator> CreateErrorValidators()
+        private static List<IErrorValidator> CreateErrorValidators()
         {
             return new List<IErrorValidator>()
             {
+                new GuessCountValidator(_guessCounter, _applicationStopper, _maxGuesses),
                 new CollectionSizeValidator(),
-                new ColourNameValidator(CreateValidColours()),
-                new GuessCountValidator(CreateGuessCounter(), CreateApplicationStopper(), _maxGuesses)
+                new ColourNameValidator(CreateValidColours())
             };
         }
 
-        public static List<string> CreateValidColours()
+        private static List<string> CreateValidColours()
         {
             return new List<string>()
             {
@@ -43,32 +45,32 @@ namespace Mastermind
             };
         }
 
-        public static ICounter CreateGuessCounter()
+        private static ICounter CreateGuessCounter()
         {
             return new GuessCounter();
         }
 
-        public static IApplicationStopper CreateApplicationStopper()
+        private static IApplicationStopper CreateApplicationStopper()
         {
             return new ApplicationStopper();
         }
 
-        public static IWinnerValidator CreateWinnerValidator()
+        private static IWinnerValidator CreateWinnerValidator()
         {
             return new WinnerValidator();
         }
 
-        public static IWinningColoursGenerator CreateWinnerColoursGenerator()
+        private static IWinningColoursGenerator CreateWinnerColoursGenerator()
         {
             return new WinningColoursGenerator(CreateRandomiser(), CreateValidColours());
         }
 
-        public static IRandomiser CreateRandomiser()
+        private static IRandomiser CreateRandomiser()
         {
             return new Randomiser();
         }
 
-        public static IEncryptedCollectionsGenerator CreateEncryptedCollectionsGenerator()
+        private static IEncryptedCollectionsGenerator CreateEncryptedCollectionsGenerator()
         {
             return new EncryptedCollectionsGenerator();
         }

@@ -18,7 +18,7 @@ namespace Mastermind
             {
                 if(!errorValidator.IsValid(inputColours))
                 {
-                    throw new ArgumentException(errorValidator.ErrorMessage);
+                    throw new Exception(errorValidator.ErrorMessage);
                 }
             }
         }

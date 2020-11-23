@@ -16,6 +16,7 @@ namespace Mastermind.Tests
             var mockColoursGenerator = new Mock<IWinningColoursGenerator>();
             var mockEncryptedCollectionsGenerator = new Mock<IEncryptedCollectionsGenerator>();
             var mockApplicationStopper = new Mock<IApplicationStopper>();
+            var mockGuessCounter = new Mock<ICounter>();
             var mastermind = new MastermindApplication(
                 mockUserInterface.Object, 
                 mockFormatter.Object, 
@@ -23,7 +24,8 @@ namespace Mastermind.Tests
                 mockWinnerValidator.Object, 
                 mockColoursGenerator.Object, 
                 mockEncryptedCollectionsGenerator.Object, 
-                mockApplicationStopper.Object
+                mockApplicationStopper.Object,
+                mockGuessCounter.Object
             );
 
             mockApplicationStopper.Setup(x => x.StopApplication).Returns(true);
@@ -38,6 +40,7 @@ namespace Mastermind.Tests
             mockWinnerValidator.Verify(x => x.isWinner(It.IsAny<List<string>>(), It.IsAny<List<string>>()), Times.Exactly(1));
             mockColoursGenerator.Verify(x => x.Generate(), Times.Exactly(1));
             mockEncryptedCollectionsGenerator.Verify(x => x.Generate(It.IsAny<List<string>>(), It.IsAny<List<string>>()));
+            mockGuessCounter.Verify(x => x.IncrementCount(), Times.Exactly(1));
         }
     }
 }
