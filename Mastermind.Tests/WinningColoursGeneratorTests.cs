@@ -13,7 +13,7 @@ namespace Mastermind.Tests
         {
             var validColours = TestHelper.SetupColours();
             var mockRandomiser = new Mock<IRandomiser>();
-            var winningColoursGenerator = new WinningColoursGenerator(mockRandomiser.Object);
+            var winningColoursGenerator = new WinningColoursGenerator(mockRandomiser.Object, validColours);
             var expected = new List<string>()
             {
                 expectedColour1,
@@ -28,7 +28,7 @@ namespace Mastermind.Tests
                 .Returns(position3)
                 .Returns(position4);
 
-            var actual = winningColoursGenerator.GenerateColours(validColours);
+            var actual = winningColoursGenerator.Generate();
 
             Assert.Equal(expected, actual);
         }

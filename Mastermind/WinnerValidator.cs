@@ -5,9 +5,9 @@ namespace Mastermind
 {
     public class WinnerValidator
     {
-        public bool isWinner(List<string> inputColours, List<string> correctColours)
+        public bool isWinner(List<string> inputColours, List<string> winningColours)
         {
-            return correctColours.SequenceEqual(inputColours);
+            return winningColours.SequenceEqual(inputColours);
         }
     }
 }

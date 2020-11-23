@@ -4,6 +4,6 @@ namespace Mastermind
 {
     public interface IWinnerValidator
     {
-        bool isWinner(List<string> input, List<string> correctColours);
+        bool isWinner(List<string> input, List<string> winningColours);
     }
 }
