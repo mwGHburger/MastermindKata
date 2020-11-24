@@ -4,11 +4,16 @@ namespace Mastermind
 {
     public class CollectionSizeValidator : IErrorValidator
     {
-        private int _maxCollectionSize = 4;
+        private int _numberOfWinningColours;
+
+        public CollectionSizeValidator(int numberOfWinningColours)
+        {
+            _numberOfWinningColours = numberOfWinningColours;
+        }
         public string ErrorMessage {get;} = StandardMessages.SizeError();
         public bool IsValid(List<string> inputColours)
         {
-            return inputColours.Count.Equals(_maxCollectionSize);
+            return inputColours.Count.Equals(_numberOfWinningColours);
         }
     }
 }

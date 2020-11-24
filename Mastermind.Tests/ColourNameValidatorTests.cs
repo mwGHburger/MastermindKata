@@ -5,20 +5,16 @@ namespace Mastermind.Tests
 {
     public class ColourValidatorTests
     {
+        ColourNameValidator colourChecker = new ColourNameValidator(TestHelper.SetupColours());
         [Fact]
         public void AreColoursValid_ShouldReturnTrue_WhenAllColoursAreValid()
         {
-            var colours = TestHelper.SetupColours();
-            var collection = new List<string>()
+            var playerInput = new List<string>()
             {
-                "Red",
-                "Blue",
-                "Green",
-                "Orange"
+                "Red", "Blue", "Green", "Orange"
             };
-            var colourChecker = new ColourNameValidator(colours);
 
-            var actual = colourChecker.IsValid(collection);
+            var actual = colourChecker.IsValid(playerInput);
 
             Assert.True(actual);
         }
@@ -26,17 +22,12 @@ namespace Mastermind.Tests
         [Fact]
         public void AreColoursValid_ShouldReturnFalse_ForAnyInvalidColours()
         {
-            var colours = TestHelper.SetupColours();
-            var collection = new List<string>()
+            var playerInput = new List<string>()
             {
-                "Red",
-                "Blue",
-                "Grey",
-                "Orange"
+                "Red", "Blue", "Grey", "Orange"
             };
-            var colourChecker = new ColourNameValidator(colours);
 
-            var actual = colourChecker.IsValid(collection);
+            var actual = colourChecker.IsValid(playerInput);
 
             Assert.False(actual);
         }

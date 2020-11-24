@@ -9,17 +9,18 @@ namespace Mastermind.Tests
         public void Generate_ShouldReturnAListWithBlackIndicatingCorrectIndex()
         {
             var validColours = TestHelper.SetupCorrectColours();
-            var input = new List<string>()
+            var playerInput = new List<string>()
             {
                 "Red", "Orange", "Yellow", "Orange"
             };
-            var encryptedCollectionGenerator = new EncryptedCollectionsGenerator();
-            var actual = encryptedCollectionGenerator.Generate(input, validColours);
+            var encryptedCollectionGenerator = new EncryptedCollectionsGenerator(TestHelper.SetupNumberOfWinningColours());
             var expected = new List<string>()
             {
-                "Black",
-                "White"
+                "Black", "White"
             };
+
+            var actual = encryptedCollectionGenerator.Generate(playerInput, validColours);
+            
 
             Assert.Equal(expected, actual);
         }

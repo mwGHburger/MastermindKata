@@ -13,7 +13,12 @@ namespace Mastermind
             var coloursArray = input.Split(',');
             foreach(string colour in coloursArray)
             {
-                var trimmedColour = colour.Trim();
+                if(String.IsNullOrEmpty(colour))
+                {
+                    break;
+                }
+                var lowerCaseColour = colour.ToLower();
+                var trimmedColour = lowerCaseColour.Trim();
                 string formattedColour;
                 formattedColour = char.ToUpper(trimmedColour[0]) + trimmedColour.Substring(1);
                 inputColours.Add(formattedColour);

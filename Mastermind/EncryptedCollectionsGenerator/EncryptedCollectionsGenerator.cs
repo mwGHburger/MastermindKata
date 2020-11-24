@@ -4,18 +4,24 @@ namespace Mastermind
 {
     public class EncryptedCollectionsGenerator : IEncryptedCollectionsGenerator
     {
+        private int _numberOfWinningColours;
+
+        public EncryptedCollectionsGenerator(int numberOfWinningColours)
+        {
+            _numberOfWinningColours = numberOfWinningColours;
+        }
         public List<string> Generate(List<string> inputColours, List<string> winningColours)
         {
             var encryptedColours = new List<string>();
-            for(int i = 0; i < 4; i++)
+            for(int i = 0; i < _numberOfWinningColours; i++)
             {
                 if(inputColours[i].Equals(winningColours[i]))
                 {
-                    encryptedColours.Add("Black");
+                    encryptedColours.Add(StandardMessages.CorrectIndexPosition());
                 }
                 else if(winningColours.Contains(inputColours[i]))
                 {
-                    encryptedColours.Add("White");
+                    encryptedColours.Add(StandardMessages.WrongIndexPosition());
                 }
             }
             return encryptedColours;

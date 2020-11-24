@@ -4,6 +4,10 @@ namespace Mastermind.Tests
 {
     public static class TestHelper
     {
+        public static int SetupNumberOfWinningColours()
+        {
+            return 4;
+        }
         public static List<string> SetupColours()
         {
             return new List<string>()

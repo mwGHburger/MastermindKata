@@ -5,6 +5,7 @@ namespace Mastermind
     public static class ClassInstantiatorFactory
     {
         private static int _maxGuesses = 60;
+        public static int NumberOfWinningColours = 4;
         private static ICounter _guessCounter = CreateGuessCounter();
         private static IApplicationStopper _applicationStopper = CreateApplicationStopper();
         
@@ -33,7 +34,7 @@ namespace Mastermind
             return new List<IErrorValidator>()
             {
                 new GuessCountValidator(_guessCounter, _applicationStopper, _maxGuesses),
-                new CollectionSizeValidator(),
+                new CollectionSizeValidator(NumberOfWinningColours),
                 new ColourNameValidator(CreateValidColours())
             };
         }
@@ -63,7 +64,7 @@ namespace Mastermind
 
         private static IWinningColoursGenerator CreateWinnerColoursGenerator()
         {
-            return new WinningColoursGenerator(CreateRandomiser(), CreateValidColours());
+            return new WinningColoursGenerator(CreateRandomiser(), CreateValidColours(), NumberOfWinningColours);
         }
 
         private static IRandomiser CreateRandomiser()
@@ -73,7 +74,7 @@ namespace Mastermind
 
         private static IEncryptedCollectionsGenerator CreateEncryptedCollectionsGenerator()
         {
-            return new EncryptedCollectionsGenerator();
+            return new EncryptedCollectionsGenerator(NumberOfWinningColours);
         }
     }
 }

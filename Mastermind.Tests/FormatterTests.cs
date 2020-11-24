@@ -6,35 +6,33 @@ namespace Mastermind.Tests
 {
     public class FormatterTests
     {
+        Formatter formatter = new Formatter();
+        
         [Fact]
         public void ConvertToList_ShouldReturnListOfStrings()
         {
-            var formatter = new Formatter();
-            var input = "red, blue, Green, Yellow";
+            var playerInput = "red, blue, Green, Yellow";
             var expected = new List<string>()
             {
-                "Red",
-                "Blue",
-                "Green",
-                "Yellow"
+                "Red", "Blue", "Green", "Yellow"
             };
 
-            var actual = formatter.ConvertToList(input);
+            var actual = formatter.ConvertToList(playerInput);
+            
             Assert.Equal(expected, actual);
         }
 
         [Fact]
         public void ConvertToString_ShouldReturnString()
         {
-            var formatter = new Formatter();
-            var input = new List<string>()
+            var playerInput = new List<string>()
             {
-                "Black",
-                "White",
+                "Black", "White"
             };
             var expected = "['Black', 'White']";
 
-            var actual = formatter.ConvertToString(input);
+            var actual = formatter.ConvertToString(playerInput);
+
             Assert.Equal(expected, actual);
         }
     }

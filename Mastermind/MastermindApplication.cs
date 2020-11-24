@@ -40,6 +40,7 @@ namespace Mastermind
                     _errorsValidator.Check(coloursList);
                     if(_winnerValidator.isWinner(coloursList, winningColours))
                     {
+                        _userInterface.Print(StandardMessages.AnnounceWinner());
                         _applicationStopper.StopApplication = true;
                     }
                     var encryptedClues = _encryptedCollectionsGenerator.Generate(coloursList,winningColours);

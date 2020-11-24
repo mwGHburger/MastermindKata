@@ -29,10 +29,11 @@ namespace Mastermind.Tests
             );
 
             mockApplicationStopper.Setup(x => x.StopApplication).Returns(true);
+            mockWinnerValidator.Setup(x => x.isWinner(It.IsAny<List<string>>(), It.IsAny<List<string>>())).Returns(true);
 
             mastermind.Run();
 
-            mockUserInterface.Verify(x => x.Print(It.IsAny<string>()), Times.Exactly(5));
+            mockUserInterface.Verify(x => x.Print(It.IsAny<string>()), Times.Exactly(6));
             mockUserInterface.Verify(x => x.GetInput(), Times.Exactly(1));
             mockFormatter.Verify(x => x.ConvertToList(It.IsAny<string>()), Times.Exactly(1));
             mockFormatter.Verify(x => x.ConvertToString(It.IsAny<List<string>>()), Times.Exactly(1));
