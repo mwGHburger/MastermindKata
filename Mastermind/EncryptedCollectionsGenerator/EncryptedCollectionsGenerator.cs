@@ -4,10 +4,12 @@ namespace Mastermind
 {
     public class EncryptedCollectionsGenerator : IEncryptedCollectionsGenerator
     {
+        private IListShuffler _listShuffler;
         private int _numberOfWinningColours;
 
-        public EncryptedCollectionsGenerator(int numberOfWinningColours)
+        public EncryptedCollectionsGenerator(IListShuffler listShuffler, int numberOfWinningColours)
         {
+            _listShuffler = listShuffler;
             _numberOfWinningColours = numberOfWinningColours;
         }
         public List<string> Generate(List<string> inputColours, List<string> winningColours)
@@ -24,7 +26,8 @@ namespace Mastermind
                     encryptedColours.Add(StandardMessages.WrongIndexPosition());
                 }
             }
-            return encryptedColours;
+
+            return _listShuffler.Shuffle(encryptedColours);
         }
     }
 }

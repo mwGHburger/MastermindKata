@@ -16,7 +16,7 @@ namespace Mastermind
             _maxGuesses = maxGuesses;
         }
 
-        public bool IsValid(List<string> collection)
+        public bool IsValid(List<string> inputColours)
         {
             if (_guessCounter.CurrentCount < _maxGuesses)
             {

@@ -74,7 +74,12 @@ namespace Mastermind
 
         private static IEncryptedCollectionsGenerator CreateEncryptedCollectionsGenerator()
         {
-            return new EncryptedCollectionsGenerator(NumberOfWinningColours);
+            return new EncryptedCollectionsGenerator(CreateListShuffler(), NumberOfWinningColours);
+        }
+
+        private static IListShuffler CreateListShuffler()
+        {
+            return new ListShuffler(CreateRandomiser());
         }
     }
 }
