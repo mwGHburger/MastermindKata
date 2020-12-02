@@ -2,7 +2,7 @@ using System.Collections.Generic;
 
 namespace Mastermind
 {
-    public interface IEncryptedCollectionsGenerator
+    public interface IHintGenerator
     {
         List<string> Generate(List<string> inputColours, List<string> winningColours);
     }

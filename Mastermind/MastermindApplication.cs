@@ -8,18 +8,18 @@ namespace Mastermind
         private IErrorsValidator _errorsValidator;
         private IWinnerValidator _winnerValidator;
         private IWinningColoursGenerator _winningColoursGenerator;
-        private IEncryptedCollectionsGenerator _encryptedCollectionsGenerator;
+        private IHintGenerator _hintGenerator;
         private IApplicationStopper _applicationStopper;
         private ICounter _guessCounter;
 
-        public MastermindApplication(IUserInterface userInterface, IFormatter formatter, IErrorsValidator errorsValidator, IWinnerValidator winnerValidator, IWinningColoursGenerator winningColoursGenerator, IEncryptedCollectionsGenerator encryptedCollectionsGenerator, IApplicationStopper applicationStopper, ICounter guessCounter)
+        public MastermindApplication(IUserInterface userInterface, IFormatter formatter, IErrorsValidator errorsValidator, IWinnerValidator winnerValidator, IWinningColoursGenerator winningColoursGenerator, IHintGenerator hintGenerator, IApplicationStopper applicationStopper, ICounter guessCounter)
         {
             _userInterface = userInterface;
             _formatter = formatter;
             _errorsValidator = errorsValidator;
             _winnerValidator = winnerValidator;
             _winningColoursGenerator = winningColoursGenerator;
-            _encryptedCollectionsGenerator = encryptedCollectionsGenerator;
+            _hintGenerator = hintGenerator;
             _applicationStopper = applicationStopper;
             _guessCounter = guessCounter;
         }
@@ -43,9 +43,9 @@ namespace Mastermind
                         _userInterface.Print(StandardMessages.AnnounceWinner());
                         _applicationStopper.StopApplication = true;
                     }
-                    var encryptedClues = _encryptedCollectionsGenerator.Generate(coloursList,winningColours);
-                    var encryptedCluesString = _formatter.ConvertToString(encryptedClues);
-                    _userInterface.Print(encryptedCluesString);
+                    var hint = _hintGenerator.Generate(coloursList,winningColours);
+                    var hintString = _formatter.ConvertToString(hint);
+                    _userInterface.Print(hintString);
                 }
                 catch(Exception exception)
                 {

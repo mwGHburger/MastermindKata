@@ -14,7 +14,7 @@ namespace Mastermind.Tests
             var mockErrorsValidator = new Mock<IErrorsValidator>();
             var mockWinnerValidator = new Mock<IWinnerValidator>();
             var mockColoursGenerator = new Mock<IWinningColoursGenerator>();
-            var mockEncryptedCollectionsGenerator = new Mock<IEncryptedCollectionsGenerator>();
+            var mockHintGenerator = new Mock<IHintGenerator>();
             var mockApplicationStopper = new Mock<IApplicationStopper>();
             var mockGuessCounter = new Mock<ICounter>();
             var mastermind = new MastermindApplication(
@@ -23,7 +23,7 @@ namespace Mastermind.Tests
                 mockErrorsValidator.Object, 
                 mockWinnerValidator.Object, 
                 mockColoursGenerator.Object, 
-                mockEncryptedCollectionsGenerator.Object, 
+                mockHintGenerator.Object, 
                 mockApplicationStopper.Object,
                 mockGuessCounter.Object
             );
@@ -40,7 +40,7 @@ namespace Mastermind.Tests
             mockErrorsValidator.Verify(x => x.Check(It.IsAny<List<string>>()), Times.Exactly(1));
             mockWinnerValidator.Verify(x => x.isWinner(It.IsAny<List<string>>(), It.IsAny<List<string>>()), Times.Exactly(1));
             mockColoursGenerator.Verify(x => x.Generate(), Times.Exactly(1));
-            mockEncryptedCollectionsGenerator.Verify(x => x.Generate(It.IsAny<List<string>>(), It.IsAny<List<string>>()));
+            mockHintGenerator.Verify(x => x.Generate(It.IsAny<List<string>>(), It.IsAny<List<string>>()));
             mockGuessCounter.Verify(x => x.IncrementCount(), Times.Exactly(1));
         }
     }

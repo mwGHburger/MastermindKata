@@ -15,7 +15,7 @@ namespace Mastermind.Tests
             {
                 "Red", "Orange", "Yellow", "Orange"
             };
-            var encryptedCollectionGenerator = new EncryptedCollectionsGenerator(mockListShuffler.Object, TestHelper.SetupNumberOfWinningColours());
+            var hintGenerator = new HintGenerator(mockListShuffler.Object, TestHelper.SetupNumberOfWinningColours());
             var expected = new List<string>()
             {
                 "White", "Black"
@@ -27,7 +27,7 @@ namespace Mastermind.Tests
                 "Black"
             });
 
-            var actual = encryptedCollectionGenerator.Generate(playerInput, validColours);
+            var actual = hintGenerator.Generate(playerInput, validColours);
             
 
             Assert.Equal(expected, actual);

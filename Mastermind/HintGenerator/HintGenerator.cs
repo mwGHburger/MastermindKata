@@ -2,12 +2,12 @@ using System.Collections.Generic;
 
 namespace Mastermind
 {
-    public class EncryptedCollectionsGenerator : IEncryptedCollectionsGenerator
+    public class HintGenerator : IHintGenerator
     {
         private IListShuffler _listShuffler;
         private int _numberOfWinningColours;
 
-        public EncryptedCollectionsGenerator(IListShuffler listShuffler, int numberOfWinningColours)
+        public HintGenerator(IListShuffler listShuffler, int numberOfWinningColours)
         {
             _listShuffler = listShuffler;
             _numberOfWinningColours = numberOfWinningColours;
