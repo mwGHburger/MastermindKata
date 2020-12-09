@@ -21,16 +21,6 @@ namespace Mastermind.Tests
             var ex = Assert.Throws<ArgumentException>(() => guessCountValidator.Validate(mockList));
 
             Assert.Equal("Error: you have had more than 60 tries!\n", ex.Message);
-        }
-
-        [Fact]
-        public void Validate_ShouldSetStopApplicationToTrue_IfCurrentCountIsLessThanMaxCount()
-        {
-            var guessCountValidator = new GuessCountValidator(mockGuessCounter.Object, mockApplicationStopper.Object, 60);
-
-            mockGuessCounter.Setup(x => x.CurrentCount).Returns(59);
-
-            guessCountValidator.Validate(mockList);
 
             mockApplicationStopper.VerifySet(x => x.StopApplication = true);
         }

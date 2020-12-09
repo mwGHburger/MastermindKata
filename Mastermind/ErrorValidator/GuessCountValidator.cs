@@ -21,9 +21,9 @@ namespace Mastermind
         {
             if (_guessCounter.CurrentCount >= _maxGuesses)
             {
+                _applicationStopper.StopApplication = true;
                 throw new ArgumentException(ErrorMessage);
             }
-            _applicationStopper.StopApplication = true;
         }
     }
 }

@@ -3,15 +3,10 @@ using System.Collections.Generic;
 namespace Mastermind
 {
     public static class ClassInstantiatorFactory
-    {
-        private static int _maxGuesses = 60;
-        public static int NumberOfWinningColours = 4;
-        private static ICounter _guessCounter = CreateGuessCounter();
-        private static IApplicationStopper _applicationStopper = CreateApplicationStopper();
-        
+    {        
         public static MastermindApplication CreateMastermindApplication()
         {
-            return new MastermindApplication(CreateUserInterface(), CreateFormatter(), CreateErrorsValidator(), CreateWinnerValidator(), CreateWinnerColoursGenerator(), CreateEncryptedCollectionsGenerator(), _applicationStopper, _guessCounter);
+            return new MastermindApplication(CreateUserInterface(), CreateFormatter(), CreateErrorsValidator(), CreateWinnerValidator(), CreateWinnerColoursGenerator(), CreateEncryptedCollectionsGenerator(), ApplicationStopper.Instance, GuessCounter.Instance);
         }
 
         private static IUserInterface CreateUserInterface()
@@ -33,28 +28,10 @@ namespace Mastermind
         {
             return new List<IErrorValidator>()
             {
-                new GuessCountValidator(_guessCounter, _applicationStopper, _maxGuesses),
-                new CollectionSizeValidator(NumberOfWinningColours),
-                new ColourNameValidator(CreateValidColours())
+                new GuessCountValidator(GuessCounter.Instance, ApplicationStopper.Instance, ApplicationProperties.MaxGuesses),
+                new CollectionSizeValidator(ApplicationProperties.NumberOfWinningColours),
+                new ColourNameValidator(ApplicationProperties.ValidColours)
             };
-        }
-
-        private static List<string> CreateValidColours()
-        {
-            return new List<string>()
-            {
-                "Red", "Blue", "Green", "Orange", "Purple", "Yellow"
-            };
-        }
-
-        private static ICounter CreateGuessCounter()
-        {
-            return new GuessCounter();
-        }
-
-        private static IApplicationStopper CreateApplicationStopper()
-        {
-            return new ApplicationStopper();
         }
 
         private static IWinnerValidator CreateWinnerValidator()
@@ -64,22 +41,17 @@ namespace Mastermind
 
         private static IWinningColoursGenerator CreateWinnerColoursGenerator()
         {
-            return new WinningColoursGenerator(CreateRandomiser(), CreateValidColours(), NumberOfWinningColours);
-        }
-
-        private static IRandomiser CreateRandomiser()
-        {
-            return new Randomiser();
+            return new WinningColoursGenerator(Randomiser.Instance, ApplicationProperties.ValidColours, ApplicationProperties.NumberOfWinningColours);
         }
 
         private static IHintGenerator CreateEncryptedCollectionsGenerator()
         {
-            return new HintGenerator(CreateListShuffler(), NumberOfWinningColours);
+            return new HintGenerator(CreateListShuffler(), ApplicationProperties.NumberOfWinningColours);
         }
 
         private static IListShuffler CreateListShuffler()
         {
-            return new ListShuffler(CreateRandomiser());
+            return new ListShuffler(Randomiser.Instance);
         }
     }
 }

@@ -7,7 +7,7 @@ namespace Mastermind.Tests
         [Fact]
         public void IncrementGuessCounter_ShouldIncreaseTheCurrentCountPropertyBy1()
         {
-            var guessCounter = new GuessCounter();
+            var guessCounter = GuessCounter.Instance;
             var expected = 1;
 
             guessCounter.IncrementCount();
