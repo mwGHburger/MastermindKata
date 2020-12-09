@@ -41,13 +41,13 @@ namespace Mastermind
 
         private void HandleCorrectPosition(List<string> encryptedColours, List<string> winningColoursCopy, int index)
         {
-            encryptedColours.Add(StandardMessages.CorrectIndexPosition());
+            encryptedColours.Add($"{Hint.Black}");
             winningColoursCopy[index] = "null";
         }
 
         private void HandleIncorrectPosition(List<string> encryptedColours, List<string> winningColoursCopy, string correctColour)
         {
-            encryptedColours.Add(StandardMessages.WrongIndexPosition());
+            encryptedColours.Add($"{Hint.White}");
             var index = winningColoursCopy.FindIndex(x => x.Equals(correctColour));
             winningColoursCopy[index] = "null";
         }

@@ -7,16 +7,5 @@ namespace Mastermind
         public static string AskForInputMessage = $"\nPlease provide {ApplicationProperties.NumberOfWinningColours}, comma-separated colours: ";
         public static string AnnounceWinner = "You win!\n";
         public static string EndOfApplication = "Ending Application...";
-
-        // TODO: Can be Enums
-        public static string CorrectIndexPosition()
-        {
-            return "Black";
-        }
-
-        public static string WrongIndexPosition()
-        {
-            return "White";
-        }
     }
 }
