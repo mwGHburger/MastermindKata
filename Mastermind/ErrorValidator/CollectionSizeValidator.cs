@@ -10,7 +10,7 @@ namespace Mastermind
         {
             _numberOfWinningColours = numberOfWinningColours;
         }
-        public string ErrorMessage {get;} = StandardMessages.SizeError();
+        public string ErrorMessage {get;} = ErrorMessages.SizeError;
         public bool IsValid(List<string> inputColours)
         {
             return inputColours.Count.Equals(_numberOfWinningColours);

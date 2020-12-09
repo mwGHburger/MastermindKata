@@ -27,12 +27,12 @@ namespace Mastermind
         public void Run()
         {
             // TODO: Consider grouping winner colours validator generator and validator
-            _userInterface.Print(StandardMessages.Welcome());
-            _userInterface.Print(StandardMessages.GeneratingColours());
+            _userInterface.Print(StandardMessages.WelcomeMessage);
+            _userInterface.Print(StandardMessages.GeneratingColoursMessage);
             var winningColours = _winningColoursGenerator.Generate();
             do
             {
-                _userInterface.Print(StandardMessages.AskForInput());
+                _userInterface.Print(StandardMessages.AskForInputMessage);
                 var inputColours = _userInterface.GetInput();
                 _guessCounter.IncrementCount();
                 var coloursList = _formatter.ConvertToList(inputColours);
@@ -41,7 +41,7 @@ namespace Mastermind
                     _errorsValidator.Check(coloursList);
                     if(_winnerValidator.isWinner(coloursList, winningColours))
                     {
-                        _userInterface.Print(StandardMessages.AnnounceWinner());
+                        _userInterface.Print(StandardMessages.AnnounceWinner);
                         _applicationStopper.StopApplication = true;
                     }
                     var hint = _hintGenerator.Generate(coloursList,winningColours);
@@ -54,7 +54,7 @@ namespace Mastermind
                 }
             }
             while(!_applicationStopper.StopApplication);
-            _userInterface.Print(StandardMessages.EndOfApplication());
+            _userInterface.Print(StandardMessages.EndOfApplication);
         }
     }
 }

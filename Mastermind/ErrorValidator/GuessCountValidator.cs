@@ -7,7 +7,7 @@ namespace Mastermind
         private ICounter _guessCounter;
         private IApplicationStopper _applicationStopper;
         private int _maxGuesses;
-        public string ErrorMessage {get;} = StandardMessages.GuessCountError();
+        public string ErrorMessage {get;} = ErrorMessages.GuessCountError;
 
         public GuessCountValidator(ICounter guessCounter, IApplicationStopper applicationStopper, int maxGuesses)
         {
