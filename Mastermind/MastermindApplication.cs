@@ -26,6 +26,7 @@ namespace Mastermind
 
         public void Run()
         {
+            // TODO: Consider grouping winner colours validator generator and validator
             _userInterface.Print(StandardMessages.Welcome());
             _userInterface.Print(StandardMessages.GeneratingColours());
             var winningColours = _winningColoursGenerator.Generate();

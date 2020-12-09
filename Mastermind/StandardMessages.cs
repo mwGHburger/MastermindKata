@@ -2,6 +2,7 @@ namespace Mastermind
 {
     public static class StandardMessages
     {
+        // TODO: Change method names, make them variables
         public static string Welcome()
         {
             return "Welcome to Mastermind\n";
@@ -21,6 +22,7 @@ namespace Mastermind
             return "You win!\n";
         }
 
+        // TODO: Break this down into another static class, make a messages folder 
         public static string SizeError()
         {
             return "Error: you must pass 4 colours!\n";
@@ -33,6 +35,7 @@ namespace Mastermind
 
         public static string GuessCountError()
         {
+            // TODO: Change 60 to variable
             return "Error: you have had more than 60 tries!\n";
         }
 
@@ -41,6 +44,7 @@ namespace Mastermind
             return "Ending Application...";
         }
 
+        // TODO: Can be Enums
         public static string CorrectIndexPosition()
         {
             return "Black";

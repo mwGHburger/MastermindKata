@@ -19,15 +19,36 @@ namespace Mastermind
             {
                 if(inputColours[i].Equals(winningColours[i]))
                 {
-                    encryptedColours.Add(StandardMessages.CorrectIndexPosition());
+                    HandleCorrectPosition(encryptedColours, winningColours, i);
                 }
                 else if(winningColours.Contains(inputColours[i]))
                 {
-                    encryptedColours.Add(StandardMessages.WrongIndexPosition());
+                    var correctColour = inputColours[i];
+                    var correctIndex = winningColours.FindIndex(x => x.Equals(correctColour));
+                    if(inputColours[correctIndex].Equals(winningColours[correctIndex]))
+                    {
+                        HandleCorrectPosition(encryptedColours, winningColours, correctIndex);
+                    }
+                    else
+                    {
+                        HandleIncorrectPosition(encryptedColours, winningColours, correctColour);
+                    }
                 }
             }
-
             return _listShuffler.Shuffle(encryptedColours);
+        }
+
+        private void HandleCorrectPosition(List<string> encryptedColours, List<string> winningColours, int index)
+        {
+            encryptedColours.Add(StandardMessages.CorrectIndexPosition());
+            winningColours[index] = "null";
+        }
+
+        private void HandleIncorrectPosition(List<string> encryptedColours, List<string> winningColours, string correctColour)
+        {
+            encryptedColours.Add(StandardMessages.WrongIndexPosition());
+            var index = winningColours.FindIndex(x => x.Equals(correctColour));
+            winningColours[index] = "null";
         }
     }
 }

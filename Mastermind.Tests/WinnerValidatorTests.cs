@@ -8,7 +8,7 @@ namespace Mastermind.Tests
         [Fact]
         public void Validate_ShouldReturnTrue_ForCorrectInput()
         {
-            var correctColours = TestHelper.SetupCorrectColours();
+            var correctColours = TestHelper.SetupWinningColours();
             var input = new List<string>()
             {
                 "Red", "Blue", "Green", "Yellow"
@@ -25,7 +25,7 @@ namespace Mastermind.Tests
         [InlineData("Blue", "Red", "Green", "Yellow")]
         public void Validate_ShouldReturnFalse_ForIncorrectInput(string colour1, string colour2, string colour3, string colour4)
         {
-            var correctColours = TestHelper.SetupCorrectColours();
+            var correctColours = TestHelper.SetupWinningColours();
             var input = new List<string>()
             {
                 colour1, colour2, colour3, colour4

@@ -5,7 +5,7 @@ namespace Mastermind.Tests
 {
     public class CollectionSizeValidatorTests
     {
-        CollectionSizeValidator collectionSizeChecker = new CollectionSizeValidator(TestHelper.SetupNumberOfWinningColours());
+        CollectionSizeValidator collectionSizeChecker = new CollectionSizeValidator(TestHelper.SetupNumberOfWinningColours);
 
         [Fact]
         public void IsCollectionSizeValid_ShouldReturnTrue_GivenCorrectCollectionSize()
