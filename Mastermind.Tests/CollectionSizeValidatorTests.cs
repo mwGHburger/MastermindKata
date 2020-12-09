@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using Xunit;
 
@@ -8,29 +9,16 @@ namespace Mastermind.Tests
         CollectionSizeValidator collectionSizeChecker = new CollectionSizeValidator(TestHelper.SetupNumberOfWinningColours);
 
         [Fact]
-        public void IsCollectionSizeValid_ShouldReturnTrue_GivenCorrectCollectionSize()
-        {
-            var playerInput = new List<string>()
-            {
-                "1","2","3","4"
-            };
-
-            var actual = collectionSizeChecker.IsValid(playerInput);
-
-            Assert.True(actual);
-        }
-
-        [Fact]
-        public void IsCollectionSizeValid_ShouldReturnFalse_GivenIncorrectCollectionSize()
+        public void Validate_ShouldThrowArgumentException_GivenIncorrectCollectionSize()
         {
             var playerInput = new List<string>()
             {
                 "1","2"
             };
 
-            var actual = collectionSizeChecker.IsValid(playerInput);
+            var ex = Assert.Throws<ArgumentException>(() => collectionSizeChecker.Validate(playerInput));
 
-            Assert.False(actual);
+            Assert.Equal("Error: you must pass 4 colours!\n", ex.Message);
         }
     }
 }

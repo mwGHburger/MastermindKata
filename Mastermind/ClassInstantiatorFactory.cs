@@ -24,7 +24,7 @@ namespace Mastermind
             return new Formatter();
         }
 
-        private static IErrorsValidator CreateErrorsValidator()
+        private static IErrorValidator CreateErrorsValidator()
         {
             return new InputErrorsValidator(CreateErrorValidators());
         }

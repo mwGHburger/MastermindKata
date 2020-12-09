@@ -11,7 +11,7 @@ namespace Mastermind.Tests
         {
             var mockUserInterface = new Mock<IUserInterface>();
             var mockFormatter = new Mock<IFormatter>();
-            var mockErrorsValidator = new Mock<IErrorsValidator>();
+            var mockErrorsValidator = new Mock<IErrorValidator>();
             var mockWinnerValidator = new Mock<IWinnerValidator>();
             var mockColoursGenerator = new Mock<IWinningColoursGenerator>();
             var mockHintGenerator = new Mock<IHintGenerator>();
@@ -37,7 +37,7 @@ namespace Mastermind.Tests
             mockUserInterface.Verify(x => x.GetInput(), Times.Exactly(1));
             mockFormatter.Verify(x => x.ConvertToList(It.IsAny<string>()), Times.Exactly(1));
             mockFormatter.Verify(x => x.ConvertToString(It.IsAny<List<string>>()), Times.Exactly(1));
-            mockErrorsValidator.Verify(x => x.Check(It.IsAny<List<string>>()), Times.Exactly(1));
+            mockErrorsValidator.Verify(x => x.Validate(It.IsAny<List<string>>()), Times.Exactly(1));
             mockWinnerValidator.Verify(x => x.isWinner(It.IsAny<List<string>>(), It.IsAny<List<string>>()), Times.Exactly(1));
             mockColoursGenerator.Verify(x => x.Generate(), Times.Exactly(1));
             mockHintGenerator.Verify(x => x.Generate(It.IsAny<List<string>>(), It.IsAny<List<string>>()));

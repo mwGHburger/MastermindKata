@@ -1,9 +1,10 @@
+// TODO: Delete this interface
 using System.Collections.Generic;
 
 namespace Mastermind
 {
     public interface IErrorsValidator
     {
-        void Check(List<string> inputColours);
+        void Validate(List<string> inputColours);
     }
 }

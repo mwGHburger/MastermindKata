@@ -5,14 +5,14 @@ namespace Mastermind
     {
         private IUserInterface _userInterface;
         private IFormatter _formatter;
-        private IErrorsValidator _errorsValidator;
+        private IErrorValidator _errorsValidator;
         private IWinnerValidator _winnerValidator;
         private IWinningColoursGenerator _winningColoursGenerator;
         private IHintGenerator _hintGenerator;
         private IApplicationStopper _applicationStopper;
         private ICounter _guessCounter;
 
-        public MastermindApplication(IUserInterface userInterface, IFormatter formatter, IErrorsValidator errorsValidator, IWinnerValidator winnerValidator, IWinningColoursGenerator winningColoursGenerator, IHintGenerator hintGenerator, IApplicationStopper applicationStopper, ICounter guessCounter)
+        public MastermindApplication(IUserInterface userInterface, IFormatter formatter, IErrorValidator errorsValidator, IWinnerValidator winnerValidator, IWinningColoursGenerator winningColoursGenerator, IHintGenerator hintGenerator, IApplicationStopper applicationStopper, ICounter guessCounter)
         {
             _userInterface = userInterface;
             _formatter = formatter;
@@ -38,7 +38,7 @@ namespace Mastermind
                 var coloursList = _formatter.ConvertToList(inputColours);
                 try
                 {
-                    _errorsValidator.Check(coloursList);
+                    _errorsValidator.Validate(coloursList);
                     if(_winnerValidator.isWinner(coloursList, winningColours))
                     {
                         _userInterface.Print(StandardMessages.AnnounceWinner);

@@ -19,15 +19,15 @@ namespace Mastermind.Tests
             var game = new InputErrorsValidator(errorValidators);
             var errorMessage = "Error: you have had more than 60 tries!";
 
-            mockGuessCounterValidator.Setup(x => x.IsValid(mockInput)).Returns(false);
             mockGuessCounterValidator.Setup(x => x.ErrorMessage).Returns(errorMessage);
+            mockGuessCounterValidator.Setup(x => x.Validate(mockInput)).Throws(new ArgumentException(errorMessage));
             
-            var exception = Assert.Throws<Exception>(() => game.Check(mockInput));
+            var exception = Assert.Throws<ArgumentException>(() => game.Validate(mockInput));
             Assert.Equal(errorMessage, exception.Message);
 
-            mockGuessCounterValidator.Verify(x => x.IsValid(mockInput), Times.Exactly(1));
-            mockCollectionSizeValidator.Verify(x => x.IsValid(mockInput), Times.Exactly(0));
-            mockColourNameValidator.Verify(x => x.IsValid(mockInput), Times.Exactly(0));
+            mockGuessCounterValidator.Verify(x => x.Validate(mockInput), Times.Exactly(1));
+            mockCollectionSizeValidator.Verify(x => x.Validate(mockInput), Times.Exactly(0));
+            mockColourNameValidator.Verify(x => x.Validate(mockInput), Times.Exactly(0));
             
         }
 
@@ -38,16 +38,15 @@ namespace Mastermind.Tests
             var game = new InputErrorsValidator(errorValidators);
             var errorMessage = "Error: you must pass 4 colours!";
 
-            mockGuessCounterValidator.Setup(x => x.IsValid(mockInput)).Returns(true);
-            mockCollectionSizeValidator.Setup(x => x.IsValid(mockInput)).Returns(false);
+            mockCollectionSizeValidator.Setup(x => x.Validate(mockInput)).Throws(new ArgumentException(errorMessage));
             mockCollectionSizeValidator.Setup(x => x.ErrorMessage).Returns(errorMessage);
 
-            var exception = Assert.Throws<Exception>(() => game.Check(mockInput));
+            var exception = Assert.Throws<ArgumentException>(() => game.Validate(mockInput));
             Assert.Equal(errorMessage, exception.Message);
 
-            mockGuessCounterValidator.Verify(x => x.IsValid(mockInput), Times.Exactly(1));
-            mockCollectionSizeValidator.Verify(x => x.IsValid(mockInput), Times.Exactly(1));
-            mockColourNameValidator.Verify(x => x.IsValid(mockInput), Times.Exactly(0));
+            mockGuessCounterValidator.Verify(x => x.Validate(mockInput), Times.Exactly(1));
+            mockCollectionSizeValidator.Verify(x => x.Validate(mockInput), Times.Exactly(1));
+            mockColourNameValidator.Verify(x => x.Validate(mockInput), Times.Exactly(0));
         }
 
         [Fact]
@@ -57,17 +56,15 @@ namespace Mastermind.Tests
             var game = new InputErrorsValidator(errorValidators);
             var errorMessage = "Error: you have given an invalid colour!";
 
-            mockGuessCounterValidator.Setup(x => x.IsValid(mockInput)).Returns(true);
-            mockCollectionSizeValidator.Setup(x => x.IsValid(mockInput)).Returns(true);
-            mockColourNameValidator.Setup(x => x.IsValid(mockInput)).Returns(false);
+            mockColourNameValidator.Setup(x => x.Validate(mockInput)).Throws(new ArgumentException(errorMessage));
             mockColourNameValidator.Setup(x => x.ErrorMessage).Returns(errorMessage);
 
-            var exception = Assert.Throws<Exception>(() => game.Check(mockInput));
+            var exception = Assert.Throws<ArgumentException>(() => game.Validate(mockInput));
             Assert.Equal(errorMessage, exception.Message);
 
-            mockGuessCounterValidator.Verify(x => x.IsValid(mockInput), Times.Exactly(1));
-            mockCollectionSizeValidator.Verify(x => x.IsValid(mockInput), Times.Exactly(1));
-            mockColourNameValidator.Verify(x => x.IsValid(mockInput), Times.Exactly(1));
+            mockGuessCounterValidator.Verify(x => x.Validate(mockInput), Times.Exactly(1));
+            mockCollectionSizeValidator.Verify(x => x.Validate(mockInput), Times.Exactly(1));
+            mockColourNameValidator.Verify(x => x.Validate(mockInput), Times.Exactly(1));
         }
     }
 }

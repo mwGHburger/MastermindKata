@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 
 namespace Mastermind
@@ -16,14 +17,13 @@ namespace Mastermind
             _maxGuesses = maxGuesses;
         }
 
-        public bool IsValid(List<string> inputColours)
+        public void Validate(List<string> inputColours)
         {
-            if (_guessCounter.CurrentCount < _maxGuesses)
+            if (_guessCounter.CurrentCount >= _maxGuesses)
             {
-                return true;
+                throw new ArgumentException(ErrorMessage);
             }
             _applicationStopper.StopApplication = true;
-            return false;
         }
     }
 }

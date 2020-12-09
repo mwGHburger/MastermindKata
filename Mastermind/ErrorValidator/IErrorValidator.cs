@@ -5,6 +5,6 @@ namespace Mastermind
     public interface IErrorValidator
     {
         string ErrorMessage {get;}
-        bool IsValid(List<string> inputColours);
+        void Validate(List<string> inputColours);
     }
 }

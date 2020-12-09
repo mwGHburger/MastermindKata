@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using Xunit;
 
@@ -7,29 +8,15 @@ namespace Mastermind.Tests
     {
         ColourNameValidator colourChecker = new ColourNameValidator(TestHelper.SetupColours());
         [Fact]
-        public void AreColoursValid_ShouldReturnTrue_WhenAllColoursAreValid()
+        public void Validate_ShouldThrowArgumentException_WhenAllColoursAreInvalid()
         {
             var playerInput = new List<string>()
             {
-                "Red", "Blue", "Green", "Orange"
+                "Red", "Blue", "Green", "NotColour"
             };
 
-            var actual = colourChecker.IsValid(playerInput);
-
-            Assert.True(actual);
-        }
-
-        [Fact]
-        public void AreColoursValid_ShouldReturnFalse_ForAnyInvalidColours()
-        {
-            var playerInput = new List<string>()
-            {
-                "Red", "Blue", "Grey", "Orange"
-            };
-
-            var actual = colourChecker.IsValid(playerInput);
-
-            Assert.False(actual);
+            var ex = Assert.Throws<ArgumentException>(() => colourChecker.Validate(playerInput));
+            Assert.Equal("Error: you have given an invalid colour!\n", ex.Message);
         }
 
     }

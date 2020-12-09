@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 
 namespace Mastermind
@@ -11,9 +12,12 @@ namespace Mastermind
             _numberOfWinningColours = numberOfWinningColours;
         }
         public string ErrorMessage {get;} = ErrorMessages.SizeError;
-        public bool IsValid(List<string> inputColours)
+        public void Validate(List<string> inputColours)
         {
-            return inputColours.Count.Equals(_numberOfWinningColours);
+            if(!inputColours.Count.Equals(_numberOfWinningColours))
+            {
+                throw new ArgumentException(ErrorMessage);
+            };
         }
     }
 }
